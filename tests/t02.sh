@@ -1,3 +1,5 @@
+# Test some lightning commands
+
 function check_all_channels {
     echo "Check all channels own amount:"
     printf "Alice   => Bob:     %11s\n" $(alice   listfunds | jq --arg next $bob_id     -r '.channels | .[] | select(.peer_id==$next) | .our_amount_msat')

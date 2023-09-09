@@ -1,3 +1,5 @@
+# Test some bitcoin commands
+
 echo "Create a mining wallet, generate an address and mine 100 blocks to it (3 times)"
 bitcoin createwallet wallet1
 # Don't use bitcoin -generate because addresses are provided unordered by bitcoin getaddressesbylabel ""
