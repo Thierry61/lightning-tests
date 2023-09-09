@@ -12,8 +12,9 @@ export LIGHTNING_RPC=$LIGHTNING_DIR/lightning-rpc
 # lightningd configuration file location
 export LIGHTNING_CONF=$HOME/lightning.conf
 
-# Use 0.0.0.0 for addr parameter to avoid iproute2 package installation:
-# export MY_IP=$(ip addr show scope global | sed -nre 's:.*inet (.*)/.*:\1:p')
+# Global IP address. This needs iproute2 package installation.
+# Another solution would be 0.0.0.0.
+export MY_IP=$(ip addr show scope global | sed -nre 's:.*inet (.*)/.*:\1:p')
 
 mkdir -p $LIGHTNING_DIR
 
@@ -26,7 +27,7 @@ bitcoin-rpcconnect=bitcoin
 bitcoin-rpcport=$PORT
 lightning-dir=$LIGHTNING_DIR
 rpc-file=$LIGHTNING_RPC
-addr=0.0.0.0
+addr=$MY_IP
 EOF
 echo "lightning.conf file created"
 
