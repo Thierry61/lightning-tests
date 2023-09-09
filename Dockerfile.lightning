@@ -1,0 +1,10 @@
+FROM elementsproject/lightningd
+
+# Useful dependencies for testing
+RUN apt update -qq && \
+    apt install -qq --no-install-recommends --allow-unauthenticated -yy \
+    iproute2 iputils-ping curl
+
+# Service entry point
+COPY start-lightning.sh .
+RUN chmod +x start-lightning.sh

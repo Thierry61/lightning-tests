@@ -1,10 +1,10 @@
 Steps:
-- define port number in `configs/port.txt` (it is used by both bitcoin and lightning nodes)
+- define port number in `configs/port.txt` (it is used by bitcoin node)
 - define bitcoin RPC auth username and password in `secrets/username.txt` and `secrets/password.txt`
 - rebuild images: `docker compose build`
 - launch the application: `docker compose up -d`
 - create aliases: `. alias.sh`
-- execute commands interacting with bitcoin and lightning nodes, for example: `. tests/t01.sh`
+- execute commands interacting with bitcoin and lightning nodes, for example: `. tests/t02.sh`
 - shutdown the application: `docker compose down`
 
 Useful docker commands:
@@ -29,3 +29,11 @@ Useful commands to interact with bitcoin node:
 - bitcoin sendtoaddress --help
 - bitcoin sendtoaddress <address> 20 "" "" false true 6 "economical" false
 - bitcoin gettransaction <transaction-id> true true
+
+Useful commands to interact with lightning nodes:
+- export addr=$(alice newaddr | jq -r '.bech32')
+- alice connect id=$bob_id host=$bob_ip
+- alice fundchannel id=$bob_id amount=16000000
+- export invoice=$(frank invoice amount_msat=1000000000 label=01 description="Frank's first invoice" | jq -r '.bolt11')
+- alice pay bolt11=$invoice
+- bob getinfo | jq -r '.fees_collected_msat'

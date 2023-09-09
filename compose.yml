@@ -11,11 +11,11 @@ services:
     configs:
       - port
   lightning:
-    # TODO
-    # For now a successful connection test to bitcoin node is:
-    # curl --user "$(cat /run/secrets/username):$(cat /run/secrets/password)" --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getblockchaininfo", "params": []}' -H 'content-type: text/plain;' http://bitcoin:$(cat /port)
-    image: "ubuntu:22.04"
-    entrypoint: sleep infinity
+    image: "lightning"
+    build:
+      context: .
+      dockerfile: Dockerfile.lightning
+    entrypoint: bash -c "./start-lightning.sh"
     depends_on:
       - bitcoin
     deploy:
@@ -33,7 +33,7 @@ secrets:
     file: secrets/password.txt
 
 configs:
-  # Bitcoin and lightning nodes use the same port number for their RPC API
+  # Bitcoin node port number for its RPC API
   # This port is not exposed to host
   port:
     file: configs/port.txt

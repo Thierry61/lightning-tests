@@ -19,12 +19,14 @@ rpcport=$PORT
 rpcbind=0.0.0.0
 rpcallowip=127.0.0.1
 rpcallowip=172.0.0.0/8
+rpcallowip=192.0.0.0/8
+rpcthreads=24
 EOF
-echo "bitconf.conf file created"
+echo "bitcoin.conf file created"
 
-# Note: not a daemon
+echo "Launching bitcoind program..."
 bitcoind -conf=$PWD/bitcoin.conf
 
-echo "bitcoind daemon stopped"
+echo "bitcoind program stopped"
 
 sleep infinity
