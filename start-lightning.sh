@@ -28,6 +28,11 @@ bitcoin-rpcport=$PORT
 lightning-dir=$LIGHTNING_DIR
 rpc-file=$LIGHTNING_RPC
 addr=$MY_IP
+announce-addr-discovered=true
+announce-addr=$MY_IP:9735
+experimental-dual-fund
+experimental-anchors
+experimental-onion-messages
 EOF
 echo "lightning.conf file created"
 

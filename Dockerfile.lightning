@@ -1,9 +1,11 @@
-FROM elementsproject/lightningd
+ARG LIGHTNING_VERSION=v23.08.1
+
+FROM elementsproject/lightningd:$LIGHTNING_VERSION
 
 # Useful dependencies for testing
 RUN apt update -qq && \
     apt install -qq --no-install-recommends --allow-unauthenticated -yy \
-    iproute2 iputils-ping curl
+    curl iproute2 iputils-ping net-tools px
 
 # Service entry point
 COPY start-lightning.sh .
